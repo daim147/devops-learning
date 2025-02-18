@@ -1,62 +1,72 @@
 # Linux
 
-Linux is a family of open-source Unix-like operating systems based on the Linux kernel, an operating system kernel first released on September 17, 1991, by Linus Torvalds. Linux is typically packaged in a Linux distribution.
+Linux is a family of open-source Unix-like operating systems based on the Linux kernel, first released on September 17, 1991, by Linus Torvalds. Linux is typically packaged in a Linux distribution.
 
 ## History
 
-Linux was originally developed for personal computers based on the Intel x86 architecture, but has since been ported to more platforms than any other operating system. Linux is the leading operating system on servers and other big iron systems such as mainframe computers, and the only OS used on TOP500 supercomputers.
+Linux was originally developed for personal computers based on the Intel x86 architecture but has since been ported to more platforms than any other operating system. It is the leading operating system on servers and other big iron systems such as mainframe computers and the only OS used on TOP500 supercomputers.
 
 ## Distributions
 
-Linux is packaged in a form known as a Linux distribution (or distro for short) for both desktop and server use. Some popular mainstream Linux distributions include Debian (and its derivatives such as Ubuntu), Fedora and openSUSE. Linux distributions include the Linux kernel, supporting utilities and libraries and usually a large amount of application software to fulfill the distribution's intended use.
+Linux is packaged in a form known as a **Linux distribution** (or _distro_ for short) for both desktop and server use. Some popular mainstream Linux distributions include:
 
-## Linux vs Unix
+- Debian (and its derivatives such as Ubuntu)
+- Fedora
+- openSUSE
 
-Linux is a Unix-like operating system, and there are other Unix-like operating systems out there. Unix is a family of operating systems, which includes Linux, Solaris, and BSD. Linux is a Unix-like operating system, but was developed without any Unix code, unlike BSD and its variants.
+Linux distributions include the Linux kernel, supporting utilities and libraries, and usually a large amount of application software to fulfill the distribution's intended use.
 
-## Debian vs Fedora
+## Linux vs. Unix
 
-Debian and Fedora are two of the most popular Linux distributions. Debian is known for its stability and is used as a base for many other distributions, while Fedora is known for its bleeding edge software and is the basis for Red Hat Enterprise Linux.
+Linux is a Unix-like operating system. Other Unix-like operating systems exist, such as Solaris and BSD. Linux is a Unix-like operating system but was developed without any Unix code, unlike BSD and its variants.
 
-## Difference between Flavor and Distribution
+## Debian vs. Fedora
+
+Debian and Fedora are two of the most popular Linux distributions:
+
+- **Debian:** Known for its stability and used as a base for many other distributions.
+- **Fedora:** Known for its bleeding-edge software and is the basis for Red Hat Enterprise Linux.
+
+## Flavor vs. Distribution
 
 A Linux distribution is a flavor of Linux, but a flavor of Linux is not necessarily a distribution. A flavor of Linux is a particular distribution of Linux that has been customized for a particular purpose or set of users.
 
-## Difference between Package Manager in Debian, Fedora and RPM
+## Package Managers: Debian, Fedora, and RPM
 
-Debian uses the Advanced Packaging Tool (APT) to manage packages, Fedora uses the Yellowdog Updater, Modified (YUM) and RPM Package Manager (RPM) to manage packages. RPM is also used in Red Hat Enterprise Linux and CentOS.
+Debian uses the **Advanced Packaging Tool (APT)** to manage packages. Fedora uses the **Yellowdog Updater, Modified (YUM)** and **RPM Package Manager (RPM)**. RPM is also used in Red Hat Enterprise Linux and CentOS.
 
-Main difference between APT and YUM is that APT is a single package manager, while YUM is a package manager and a package repository manager.
+The main difference between APT and YUM is that APT is a single package manager, while YUM is both a package manager and a package repository manager.
 
-## Difference between Package Manager and Package Repository Manager
+## Package Manager vs. Package Repository Manager
 
-A package manager is a tool that automates the process of installing, upgrading, configuring, and removing software packages. A package repository manager is a tool that manages software packages in a repository, which is a collection of software packages. Like _Npm_ is a package manager and _Npm registry_ is a package repository manager.
+- **Package Manager:** A tool that automates the process of installing, upgrading, configuring, and removing software packages.
+- **Package Repository Manager:** A tool that manages software packages in a repository, which is a collection of software packages.
 
-## Types of files in Linux
+  _Example:_ Npm is a package manager, and the Npm registry is a package repository manager.
 
-In Linux, files can be classified into different types based on their contents and usage. Some common types of and there representation in Linux are:
+## Types of Files in Linux
 
-`file` command can be used to determine the type of a file.
+In Linux, files can be classified into different types based on their contents and usage. The `file` command can be used to determine the type of a file.
 
-- Regular files: These are normal files that contain data, such as text files, images, and executables. They are represented by `-` in the file permissions.
-- Directories: These are files that contain other files and directories. They are represented by `d` in the file permissions.
-- Symbolic links: These are files that point to another file or directory. They are represented by `l` in the file permissions.
-- Device files: These are files that represent hardware devices, such as hard drives and printers. They are represented by `b` for block devices and `c` for character devices in the file permissions.
-- Named pipes: These are files that allow inter-process communication. They are represented by `p` in the file permissions.
-- Sockets: These are files that allow communication between processes on the same or different systems. They are represented by `s` in the file permissions.
-- Special files: These are files that represent special devices or filesystems. They are represented by `s` in the file permissions.
-- Executable files: These are files that contain executable code, such as scripts and binaries. They are represented by `x` in the file permissions.
-- Hidden files: These are files that are hidden from normal directory listings. They are represented by a `.` at the beginning of the filename.
-- Configuration files: These are files that contain configuration settings for applications and the system. They are represented by `.conf` or `.cfg` in the filename.
-- Log files: These are files that contain log messages generated by the system and applications. They are represented by `.log` in the filename.
-- Temporary files: These are files that are used to store temporary data. They are represented by `.tmp` or `.temp` in the filename.
-- Archive files: These are files that contain compressed data. They are represented by `.tar`, `.zip`, or `.gz` in the filename.
-- Image files: These are files that contain images. They are represented by `.jpg`, `.png`, or `.gif` in the filename.
-- Audio files: These are files that contain audio data. They are represented by `.mp3`, `.wav`, or `.flac` in the filename.
-- Video files: These are files that contain video data. They are represented by `.mp4`, `.avi`, or `.mkv` in the filename.
-- Document files: These are files that contain text or document data. They are represented by `.txt`, `.docx`, or `.pdf` in the filename.
-- Binary files: These are files that contain binary data. They are represented by `.bin`, `.exe`, or `.dll` in the filename.
-- Source code files: These are files that contain source code for programs. They are represented by `.c`, `.java`, or `.py` in the filename.
-- Library files: These are files that contain shared libraries used by programs. They are represented by `.so` or `.dll` in the filename.
-- System files: These are files that are part of the operating system. They are represented by `.sys`, `.dll`, or `.cfg` in the filename.
-- User files: These are files that are created and managed by users. They are represented by `.txt`, `.docx`, or `.jpg` in the filename.
+- **Regular files:** Normal files that contain data (e.g., text files, images, executables). Represented by `-` in file permissions.
+- **Directories:** Files that contain other files and directories. Represented by `d` in file permissions.
+- **Symbolic links:** Files that point to another file or directory. Represented by `l` in file permissions.
+- **Device files:** Files that represent hardware devices (e.g., hard drives, printers). Represented by `b` (block devices) and `c` (character devices) in file permissions.
+- **Named pipes:** Files that allow inter-process communication. Represented by `p` in file permissions.
+- **Sockets:** Files that allow communication between processes on the same or different systems. Represented by `s` in file permissions.
+- **Special files:** Files that represent special devices or filesystems. Represented by `s` in file permissions.
+- **Executable files:** Files that contain executable code (e.g., scripts, binaries). Represented by `x` in file permissions.
+- **Hidden files:** Files hidden from normal directory listings. Start with a `.` at the beginning of the filename.
+- **Configuration files:** Files that contain configuration settings for applications and the system. Typically have a `.conf` or `.cfg` extension.
+- **Log files:** Files that contain log messages generated by the system and applications. Typically have a `.log` extension.
+- **Temporary files:** Files used to store temporary data. Typically have a `.tmp` or `.temp` extension.
+- **Archive files:** Files that contain compressed data. Typically have a `.tar`, `.zip`, or `.gz` extension.
+- **Image files:** Files that contain images. Typically have a `.jpg`, `.png`, or `.gif` extension.
+- **Audio files:** Files that contain audio data. Typically have a `.mp3`, `.wav`, or `.flac` extension.
+- **Video files:** Files that contain video data. Typically have a `.mp4`, `.avi`, or `.mkv` extension.
+- **Document files:** Files that contain text or document data. Typically have a `.txt`, `.docx`, or `.pdf` extension.
+- **Binary files:** Files that contain binary data. Typically have a `.bin`, `.exe`, or `.dll` extension.
+- **Source code files:** Files that contain source code for programs. Typically have a `.c`, `.java`, or `.py` extension.
+- **Library files:** Files that contain shared libraries used by programs. Typically have a `.so` or `.dll` extension.
+- **System files:** Files that are part of the operating system. Typically have a `.sys`, `.dll`, or `.cfg` extension.
+- **User files:** Files created and managed by users. Can have extensions like `.txt`, `.docx`, or `.jpg`.
