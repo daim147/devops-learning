@@ -25,3 +25,21 @@ Update /etc/hosts:
 `sudo vim /etc/hosts`
 
 `/dev/null` is a special file in Unix-like operating systems that discards all data written to it. It is often used to redirect output to nothing, effectively suppressing it. For example, `command > /dev/null` redirects the output of `command` to `/dev/null`, effectively silencing any output.`cat /dev/null > file` will delete the content of file.
+
+## Create a file and append text to it
+
+note: there should be no space between `<<` and `EOF` and around `EOF`
+
+```bash
+cat > file.html <<EOF
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Webpage</title>
+</head>
+<body>
+    <h1>Welcome to my webpage!</h1>
+</body>
+</html>
+EOF
+```

@@ -65,7 +65,7 @@ Environment is a collection of virtual machines managed by Vagrant. It consists 
    This gracefully shuts down the virtual machine, similar to powering it off. It saves the current state so you can later restart the environment.
 
 5. `vagrant destroy` - Destroy the Vagrant environment.  
-   This permanently removes the virtual machine and its associated resources, freeing up system resources. You will need to run `vagrant up` again to recreate the VM if needed.
+   This permanently removes the virtual machine and its associated resources, freeing up system resources. You will need to run `vagrant up` again to recreate the VM if needed. `vagrant destroy -f` will destroy the VM without confirmation.
 
 6. `vagrant status` - Check the status of the Vagrant environment.  
    This shows you whether your virtual machines are running, halted, suspended, or in another state, helping you manage and troubleshoot your environments.
@@ -106,4 +106,16 @@ Environment is a collection of virtual machines managed by Vagrant. It consists 
 18. `exit` - Exit the SSH session in the Vagrant environment.  
     Simply typing `exit` will close your SSH session and return you to your host machine's terminal.
 
-Only Vagrant User can switch to root user by using `sudo -i` command.
+Only Vagrant User can switch to root user by default by using `sudo -i` command.
+
+`~/.vagrant.d` is the default directory where Vagrant stores its configuration files, boxes, and plugins.s
+
+Shared Folder is a directory on the host machine that is accessible from the guest machine. It allows you to share files between the host and guest machines, making it easy to transfer data and collaborate on projects. Shared folders can be configured in the Vagrantfile using the `config.vm.synced_folder` directive. Default shared folder is `/vagrant` in the guest machine. which is the same as the Vagrantfile directory on the host machine.
+
+## Provisioning
+
+Provisioning is the process of setting up and configuring software, services, and resources on a virtual machine or server. It involves installing and configuring the necessary components, such as operating systems, applications, databases, and networking settings, to prepare the system for use. Provisioning can be done manually or automated using tools like shell scripts, configuration management tools (e.g., Puppet, Chef, Ansible), and cloud orchestration platforms (e.g., Terraform).
+
+### Vagrant Provisioning
+
+Vagrant allows you to automate the provisioning of virtual machines using shell scripts, configuration management tools, and other provisioning methods. You can define provisioning scripts in the Vagrantfile to set up the environment according to your requirements. Vagrant supports various provisioners, such as shell, Puppet, Chef, Ansible, and Salt, to automate the installation and configuration of software and services on the guest machine.
