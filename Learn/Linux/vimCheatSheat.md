@@ -1,112 +1,343 @@
 # Vim Cheat Sheet
 
-This is command mode editor for files. Other editors in Linux are emacs, gedit
-vi editor is most popular
+Vim (Vi Improved) is a highly configurable text editor built to enable efficient text editing. It is an improved version of the vi editor distributed with most UNIX systems. Vim is known for its modal editing, extensive plugin support, and powerful customization options. Other editors in Linux are emacs and gedit, but Vim remains a favorite among developers and system administrators.
 
-It has 3 modes:
+Vim operates in three primary modes:
 
-1. Command Mode
-2. Insert Mode
-3. Extended Command Mode
+1.  **Command Mode**: For navigating and executing commands.
+2.  **Insert Mode**: For inserting and appending text.
+3.  **Extended Command Mode (Ex Mode)**: For executing more complex commands.
 
-By default, it opens in command mode. To enter insert mode, press `i`. To enter extended command mode, press `:`
+By default, Vim opens in command mode. Press `i` to enter insert mode and `:` to enter extended command mode.
 
 ## Basic Navigation
 
-- `gg` - Go to beginning of file
-- `G` - Go to end of file
-- `w` - Move cursor forward one word
-- `b` - Move cursor backward one word
-- `nw` - Move cursor forward n words (e.g., `5w`)
-- `nb` - Move cursor backward n words (e.g., `5b`)
-- `0` - Move to beginning of line
-- `$` - Move to end of line
-- `h` - Move left
-- `j` - Move down
-- `k` - Move up
-- `l` - Move right
-- `:n` or `:20` - Go to line number n (e.g., line 20)
+These commands are used to move the cursor around the file in command mode.
+
+- `gg`: Go to the beginning of the file.
+  ```vim
+  gg
+  ```
+- `G`: Go to the end of the file.
+  ```vim
+  G
+  ```
+- `w`: Move the cursor forward one word.
+  ```vim
+  w
+  ```
+- `b`: Move the cursor backward one word.
+  ```vim
+  b
+  ```
+- `nw`: Move the cursor forward n words (e.g., `5w`).
+  ```vim
+  5w
+  ```
+- `nb`: Move the cursor backward n words (e.g., `5b`).
+  ```vim
+  5b
+  ```
+- `0`: Move to the beginning of the line.
+  ```vim
+  0
+  ```
+- `$`: Move to the end of the line.
+  ```vim
+  $
+  ```
+- `h`: Move left.
+  ```vim
+  h
+  ```
+- `j`: Move down.
+  ```vim
+  j
+  ```
+- `k`: Move up.
+  ```vim
+  k
+  ```
+- `l`: Move right.
+  ```vim
+  l
+  ```
+- `:n` or `:20`: Go to line number n (e.g., line 20).
+  ```vim
+  :20
+  ```
 
 ## Editing Modes
 
-- `i` - Insert mode (before cursor)
-- `a` - Insert mode (after cursor)
-- `A` - Insert mode (end of line)
-- `o` - Insert mode (new line below)
-- `O` - Insert mode (new line above)
-- `Esc` - Exit insert mode and return to normal mode
+These commands switch between different editing modes.
+
+- `i`: Insert mode (before cursor).
+  ```vim
+  i
+  ```
+- `a`: Insert mode (after cursor).
+  ```vim
+  a
+  ```
+- `A`: Insert mode (end of line).
+  ```vim
+  A
+  ```
+- `o`: Insert mode (new line below).
+  ```vim
+  o
+  ```
+- `O`: Insert mode (new line above).
+  ```vim
+  O
+  ```
+- `Esc`: Exit insert mode and return to normal mode.
+  ```vim
+  Esc
+  ```
 
 ## Copy & Paste (Yank)
 
-- `yy` or `VY` - Copy (yank) entire line
-- `nyy` - Copy n lines (e.g., `5yy`)
-- `p` - Paste below cursor
-- `P` - Paste above cursor
-- `dd` - Cut entire line
-- `ndd` - Cut n lines (e.g., `5dd`)
+These commands are used for copying, cutting, and pasting text.
+
+- `yy` or `Y`: Copy (yank) entire line.
+  ```vim
+  yy
+  ```
+- `nyy`: Copy n lines (e.g., `5yy`).
+  ```vim
+  5yy
+  ```
+- `p`: Paste below cursor.
+  ```vim
+  p
+  ```
+- `P`: Paste above cursor.
+  ```vim
+  P
+  ```
+- `dd`: Cut entire line.
+  ```vim
+  dd
+  ```
+- `ndd`: Cut n lines (e.g., `5dd`).
+  ```vim
+  5dd
+  ```
 
 ## Deleting & Undoing
 
-- `x` - Delete character under cursor
-- `X` - Delete character before cursor
-- `dw` - Delete word
-- `dd` - Delete line
-- `ndd` - Delete n lines
-- `d$` - Delete to end of line
-- `d0` - Delete to beginning of line
-- `u` - Undo last change
-- `U` - Undo all changes on line
-- `Ctrl+r` - Redo changes
+Commands for deleting text and undoing changes.
+
+- `x`: Delete character under cursor.
+  ```vim
+  x
+  ```
+- `X`: Delete character before cursor.
+  ```vim
+  X
+  ```
+- `dw`: Delete word.
+  ```vim
+  dw
+  ```
+- `dd`: Delete line.
+  ```vim
+  dd
+  ```
+- `ndd`: Delete n lines.
+  ```vim
+  ndd
+  ```
+- `d$`: Delete to end of line.
+  ```vim
+  d$
+  ```
+- `d0`: Delete to beginning of line.
+  ```vim
+  d0
+  ```
+- `u`: Undo last change.
+  ```vim
+  u
+  ```
+- `U`: Undo all changes on line.
+  ```vim
+  U
+  ```
+- `Ctrl+r`: Redo changes.
+  ```vim
+  Ctrl+r
+  ```
 
 ## Extended Mode (Colon Mode)
 
-- `Esc+:w` - Save changes
-- `Esc+:w!` - Force save changes
-- `Esc+:q` - Quit without saving
-- `Esc+:q!` - Force quit without saving
-- `Esc+:wq` - Save and quit
-- `Esc+:wq!` - Force save and quit
-- `Esc+:x` - Save and quit
-- `Esc+:X` - Set/remove password for file
-- `Esc+:se nu` - Show line numbers
-- `Esc+:se nonu` - Hide line numbers
+Commands entered by pressing `:` in normal mode.
+
+- `:w`: Save changes.
+  ```vim
+  :w
+  ```
+- `:w!`: Force save changes (if you have permission issues).
+  ```vim
+  :w!
+  ```
+- `:q`: Quit without saving.
+  ```vim
+  :q
+  ```
+- `:q!`: Force quit without saving.
+  ```vim
+  :q!
+  ```
+- `:wq`: Save and quit.
+  ```vim
+  :wq
+  ```
+- `:wq!`: Force save and quit.
+  ```vim
+  :wq!
+  ```
+- `:x`: Save and quit (only if changes were made).
+  ```vim
+  :x
+  ```
+- `:X`: Set/remove password for file.
+  ```vim
+  :X
+  ```
+- `:set nu`: Show line numbers.
+  ```vim
+  :set nu
+  ```
+- `:set nonu`: Hide line numbers.
+  ```vim
+  :set nonu
+  ```
 
 ## Search & Replace
 
-- `/pattern` - Search forward for pattern
-- `?pattern` - Search backward for pattern
-- `n` - Repeat search forward
-- `N` - Repeat search backward
-- `:%s/old/new/g` - Replace all occurrences in file
-- `:s/old/new/g` - Replace all occurrences in line
+Commands for searching and replacing text.
+
+- `/pattern`: Search forward for pattern.
+  ```vim
+  /pattern
+  ```
+- `?pattern`: Search backward for pattern.
+  ```vim
+  ?pattern
+  ```
+- `n`: Repeat search forward.
+  ```vim
+  n
+  ```
+- `N`: Repeat search backward.
+  ```vim
+  N
+  ```
+- `:%s/old/new/g`: Replace all occurrences in file.
+  ```vim
+  :%s/old/new/g
+  ```
+- `:%s/old/new/gc`: Replace all occurrences in file with confirmation.
+  ```vim
+  :%s/old/new/gc
+  ```
+- `:s/old/new/g`: Replace all occurrences in line.
+  ```vim
+  :s/old/new/g
+  ```
 
 ## Visual Mode
 
-- `v` - Start visual mode
-- `V` - Start linewise visual mode
-- `Ctrl+v` - Start visual block mode
-- `y` - Copy selection
-- `d` - Delete selection
-- `>` - Indent right
-- `<` - Indent left
+Commands for selecting text visually.
+
+- `v`: Start visual mode (character-wise).
+  ```vim
+  v
+  ```
+- `V`: Start linewise visual mode.
+  ```vim
+  V
+  ```
+- `Ctrl+v`: Start visual block mode.
+  ```vim
+  Ctrl+v
+  ```
+- `y`: Copy selection.
+  ```vim
+  y
+  ```
+- `d`: Delete selection.
+  ```vim
+  d
+  ```
+- `>`: Indent right.
+  ```vim
+  >
+  ```
+- `<`: Indent left.
+  ```vim
+  <
+  ```
 
 ## Windows & Tabs
 
-- `:sp filename` - Open filename in horizontal split
-- `:vsp filename` - Open filename in vertical split
-- `Ctrl+w h/j/k/l` - Navigate between windows
-- `:tabnew filename` - Open filename in new tab
-- `gt` - Next tab
-- `gT` - Previous tab
+Commands for managing multiple windows and tabs.
+
+- `:sp filename`: Open filename in horizontal split.
+  ```vim
+  :sp filename
+  ```
+- `:vsp filename`: Open filename in vertical split.
+  ```vim
+  :vsp filename
+  ```
+- `Ctrl+w h/j/k/l`: Navigate between windows (left/down/up/right).
+  ```vim
+  Ctrl+w h
+  ```
+- `:tabnew filename`: Open filename in new tab.
+  ```vim
+  :tabnew filename
+  ```
+- `gt`: Next tab.
+  ```vim
+  gt
+  ```
+- `gT`: Previous tab.
+  ```vim
+  gT
+  ```
 
 ## Miscellaneous
 
-- `.` - Repeat last command
-- `ZZ` - Save and quit
-- `ZQ` - Quit without saving
-- `:help` - Open help
-- `:set number` - Show line numbers
-- `:set nonumber` - Hide line numbers
+Useful commands that don't fit into other categories.
+
+- `.`: Repeat last command.
+  ```vim
+  .
+  ```
+- `ZZ`: Save and quit.
+  ```vim
+  ZZ
+  ```
+- `ZQ`: Quit without saving.
+  ```vim
+  ZQ
+  ```
+- `:help`: Open help.
+  ```vim
+  :help
+  ```
+- `:set number` or `:set nu`: Show line numbers.
+  ```vim
+  :set number
+  ```
+- `:set nonumber` or `:set nonu`: Hide line numbers.
+  ```vim
+  :set nonumber
+  ```
 
 ## Reviewing Changes in Vim
 
@@ -117,71 +348,29 @@ To review changes in Vim, you can use several built-in features and plugins. Her
 #### Undo and Redo
 
 - **Undo**: To undo changes, press `u`.
+  ```vim
+  u
+  ```
 - **Redo**: To redo changes, press `Ctrl-r`.
+  ```vim
+  Ctrl-r
+  ```
 
 #### Viewing Undo History
 
 - **Undo Tree**: Vim has an undo tree that allows you to navigate through different states of your file.
   - To view the undo tree, you can use the `:undolist` command.
+    ```vim
+    :undolist
+    ```
   - To navigate through the undo tree, you can use `:earlier` and `:later` commands.
+    ```vim
+    :earlier 4m "Go back 4 minutes"
+    :later 1h    "Go forward 1 hour"
+    ```
 
 ### 2. Using Diff Mode
 
 If you have two versions of a file and want to compare them, you can use Vim's diff mode.
 
 #### Open Files in Diff Mode
-
-```bash
-vimdiff file1 file2
-```
-
-or within Vim:
-
-```vim
-:vert diffsplit file2
-```
-
-### 3. Using Plugins
-
-If you are using Git, the vim-fugitive plugin is very powerful for reviewing changes.
-Install `vim-fugitive`: You can install it using a plugin manager like vim-plug.
-
-First need to install Plug
-
-```base
-Plug 'tpope/vim-fugitive'
-```
-
-View Git Diff: Within Vim, you can use the following commands:
-
-- `:Gdiff` - Open the Git diff for the current file.
-- `:Gstatus` - Open the Git status window to stage or view changes.
-- `:Gblame` - Open the Git blame view to see who changed each line.
-- `:Gcommit` - Open the Git commit window to write a commit message.
-- `:Gpush` - Push changes to the remote repository.
-- `:Gpull` - Pull changes from the remote repository.
-- `:Glog` - View the Git log.
-- `:Ggrep` - Search the Git repository.
-- `:Gmove` - Move or rename a file in Git.
-- `:Gdelete` - Delete a file in Git.
-- `:Gread` - Read a file from the Git repository.
-- `:Gwrite` - Write the current file to the Git repository.
-- `:Gbrowse` - Open the current file in the Git repository in a web browser.
-- `:Gedit` - Open a file from the Git repository.
-- `:Gbrowse` - Open the current file in the Git repository in a web browser.
-
-#### vim-signify or vim-gitgutter
-
-These plugins show a visual representation of changes in the gutter (the left side of the editor).
-
-Install vim-signify:
-
-```vim
-Plug 'mhinz/vim-signify'
-```
-
-Install vim-gitgutter:
-
-```vim
-Plug 'airblade/vim-gitgutter'
-```

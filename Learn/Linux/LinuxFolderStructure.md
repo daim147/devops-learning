@@ -1,84 +1,87 @@
 # Linux Folder Structure
 
-All the files and directories in Linux are arranged in a hierarchical structure. The root directory `/` is the top-level directory in the file system, and all other directories are subdirectories of the root directory. The Linux file system follows the Filesystem Hierarchy Standard (FHS), which defines the structure and contents of the file system.The files _can vary from one distribution to another_, but the basic structure remains the same.
+All the files and directories in Linux are arranged in a hierarchical structure. The root directory `/` is the top-level directory in the file system, and all other directories are subdirectories of the root directory. The Linux file system follows the Filesystem Hierarchy Standard (FHS), which defines the structure and contents of the file system. The files _can vary from one distribution to another_, but the basic structure remains the same.
+
 These are some of the common directories found in a Linux file system:
 
 ## /etc
 
-etc stands for "et cetera" and is used to store system configuration files. It contains configuration files for the system and applications, as well as scripts and other files used by the system.
+`/etc` stands for "et cetera" and is used to store system configuration files. It contains configuration files for the system and applications, as well as scripts and other files used by the system. This directory is crucial for system administration as it controls how the system behaves.
 
 <details>
   <summary>Common files and directories in /etc</summary>
 
 - `/etc/os-release` - Contains information about the operating system release.
-
 - `/etc/passwd` - Contains information about user accounts.
-
 - `/etc/group` - Contains information about user groups.
-
 - `/etc/shadow` - Contains encrypted password information for user accounts.
-
 - `/etc/hostname` - Contains the hostname of the system.
-
 - `/etc/hosts` - Contains IP addresses and hostnames for the system.
-
 - `/etc/resolv.conf` - Contains DNS resolver configuration.
-
 - `/etc/fstab` - Contains file system mount information.
-
 - `/etc/mtab` - Contains a list of currently mounted file systems.
-
 - `/etc/crontab` - Contains scheduled tasks for the system.
-
 - `/etc/profile` - Contains system-wide shell settings.
-
 - `/etc/sudoers` - Contains sudo configuration settings.
-
-- `/etc/init.d/` - Contains system startup scripts.
-
+- `/etc/init.d/` - Contains system startup scripts (legacy, often replaced by systemd).
 - `/etc/systemd/` - Contains systemd configuration files.
-
-- `/etc/apt/` - Contains APT package manager configuration files.
-
-- `/etc/yum/` - Contains YUM package manager configuration files.
-
+- `/etc/apt/` - Contains APT package manager configuration files (Debian/Ubuntu).
+- `/etc/yum/` - Contains YUM package manager configuration files (CentOS/RHEL).
 - `/etc/nginx/` - Contains Nginx web server configuration files.
-
 - `/etc/apache2/` - Contains Apache web server configuration files.
-
 - `/etc/ssh/` - Contains SSH server configuration files.
-
 - `/etc/samba/` - Contains Samba server configuration files.
-
 - `/etc/mysql/` - Contains MySQL database server configuration files.
-
 - `/etc/postfix/` - Contains Postfix mail server configuration files.
-
 - `/etc/ssl/` - Contains SSL certificate and key files.
-
 - `/etc/logrotate.d/` - Contains log rotation configuration files.
-
 - `/etc/rsyslog.d/` - Contains rsyslog configuration files.
-
 - `/etc/sysctl.conf` - Contains kernel parameters configuration.
-
 - `/etc/modprobe.d/` - Contains kernel module configuration files.
-
-- `/etc/network/` - Contains network configuration files.
-
+- `/etc/network/` - Contains network configuration files (Debian/Ubuntu).
 - `/etc/apache2/sites-available/` - Contains Apache virtual host configuration files.
-
 - `/etc/apache2/sites-enabled/` - Contains enabled Apache virtual host configuration files.
-
 - `/etc/nginx/sites-available/` - Contains Nginx server block configuration files.
-
 - `/etc/nginx/sites-enabled/` - Contains enabled Nginx server block configuration files.
-
 - `/etc/php/` - Contains PHP configuration files.
-
 - `/etc/php/php.ini` - Contains PHP configuration settings.
 
-</details>
+  Example: `/etc/hosts`
+
+  ```bash
+  127.0.0.1   localhost
+  127.0.1.1   your-hostname
+
+  # The following lines are desirable for IPv6 capable hosts
+  ::1     localhost ip6-localhost ip6-loopback
+  ff02::1 ip6-allnodes
+  ff02::2 ip6-allrouters
+  ```
+
+  Example: `/etc/nginx/nginx.conf`
+
+  ```nginx
+  user www-data;
+  worker_processes auto;
+  pid /run/nginx.pid;
+  include /etc/nginx/modules-enabled/*.conf;
+
+  events {
+    worker_connections 768;
+    # multi_accept on;
+  }
+
+  http {
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    keepalive_timeout 65;
+    types_hash_max_size 2048;
+    # ... more configuration ...
+  }
+  ```
+
+  </details>
 
 ## /root
 
@@ -98,7 +101,7 @@ The `/sbin` directory contains system binaries that are used for system administ
 
 ## /usr
 
-The `/usr` directory contains user-related system files and programs. It is divided into several subdirectories:
+The `/usr` directory contains user-related system files and programs. It is divided into several subdirectories and is one of the largest directories in the file system, containing the majority of user utilities and applications.
 
 <details>
   <summary>Common files and directories in /usr</summary>
@@ -138,13 +141,23 @@ The `/usr` directory contains user-related system files and programs. It is divi
 - `/usr/share/httpd/icons` - Contains Apache HTTP server icon files.
 - `/usr/share/httpd/manual` - Contains Apache HTTP server manual files.
 - `/usr/share/httpd/noindex` - Contains Apache HTTP server noindex files.
-- `/usr/share/httpd/icons` - Contains Apache HTTP server icon files.
 
-</details>
+  Example: `/usr/bin/git` (Git executable)
+
+  ```bash
+  #!/bin/sh
+  #
+  # Git wrapper script
+  #
+  exec /usr/lib/git-core/git "$@"
+  ```
+
+  Example: `/usr/share/man/man1/ls.1.gz` (Manual page for `ls` command)
+  </details>
 
 ## /var
 
-The `/var` directory contains variable data files that are expected to change in size and content during normal system operation. It is divided into several subdirectories:
+The `/var` directory contains variable data files that are expected to change in size and content during normal system operation. It is divided into several subdirectories and is used for storing logs, caches, and other dynamic content.
 
 <details>
   <summary>Common files and directories in /var</summary>
@@ -165,7 +178,10 @@ The `/var` directory contains variable data files that are expected to change in
 - `/var/log/mysql` - Contains MySQL database server log files.
 - `/var/log/postgresql` - Contains PostgreSQL database server log files.
 
-</details>
+  Example: `/var/log/syslog` (System log file)
+
+  Example: `/var/cache/apt/archives/` (APT package archive cache)
+  </details>
 
 ## /tmp
 
@@ -177,10 +193,10 @@ The `/dev` directory contains device files that represent hardware devices conne
 
 ## /proc
 
-The `/proc` directory is a virtual file system that provides information about running processes and system resources. It contains files and directories that represent system processes, memory, CPU information, and other system resources.
+The `/proc` directory is a virtual file system that provides information about running processes and system resources. It contains files and directories that represent system processes, memory, CPU information, and other system resources. This directory is dynamically generated by the kernel.
 
-  <details>
-    <summary>Common files and directories in /proc</summary>
+<details>
+  <summary>Common files and directories in /proc</summary>
 
 - `/proc/cpuinfo` - Contains information about the CPU.
 - `/proc/meminfo` - Contains information about memory usage.
@@ -209,6 +225,38 @@ The `/proc` directory is a virtual file system that provides information about r
 - `/proc/sys/fs/nfs` - Contains NFS file system settings.
 - `/proc/sys/fs/nfsd` - Contains NFS server settings.
 - `/proc/sys/fs/nfsd/nfsv4` - Contains NFSv4 server settings.
+
+  Example: `/proc/cpuinfo`
+
+  ```
+  processor       : 0
+  vendor_id       : GenuineIntel
+  cpu family      : 6
+  model           : 158
+  model name      : Intel(R) Core(TM) i7-8700K CPU @ 3.70GHz
+  stepping        : 10
+  microcode       : 0xde
+  cpu MHz         : 4700.144
+  cache size      : 12288 KB
+  physical id     : 0
+  siblings        : 12
+  core id         : 0
+  cpu cores       : 6
+  apicid          : 0
+  initial apicid  : 0
+  fpu             : yes
+  fpu_exception   : yes
+  cpuid level     : 22
+  wp              : yes
+  flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm3 support_lockstep cpufreq
+  bugs            :
+  bogomips        : 7400.28
+  clflush size    : 64
+  cache_alignment : 64
+  address sizes   : 39 bits physical, 48 bits virtual
+  power management:
+  ```
+
   </details>
 
 ## /sys

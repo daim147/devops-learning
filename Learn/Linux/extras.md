@@ -1,34 +1,74 @@
-# General Information
+# Linux Commands and System Information
 
-`[vagrant@localhost ~]$` is the default command prompt for a Vagrant virtual machine. It consists of the username `vagrant` and the hostname `localhost`. The hostname `localhost` is used to refer to the local system, while the username `vagrant` is the default username for a Vagrant virtual machine. The `~` symbol represents the current user's home directory. The `$` symbol indicates that the user has normal user privileges. If the user has root privileges, the command prompt will end with a `#` symbol.
+## Command Prompt Explained
 
-`touch file{1..5}.txt` creates five empty files named `file1.txt`, `file2.txt`, `file3.txt`, `file4.txt`, and `file5.txt`. The `{1..5}` syntax is used to generate a sequence of numbers from 1 to 5, which are then appended to the filename `file.txt`.
+The default Vagrant command prompt `[vagrant@localhost ~]$` consists of:
 
-## Change Hostname
+- **Username**: `vagrant`
+- **Hostname**: `localhost`
+- **Directory**: `~` (home directory)
+- **Privilege indicator**:
+  - `$` for normal user
+  - `#` for root user
 
-Temporary Change (until reboot):
+## Useful Commands
 
-`sudo hostname new-hostname`
+### File Operations
 
-Permanent Change:
+Create multiple files in sequence:
 
-`sudo hostnamectl set-hostname new-hostname`
+```bash
+touch file{1..5}.txt
+```
 
-Manually edit the hostname file:
+This creates: `file1.txt`, `file2.txt`, `file3.txt`, `file4.txt`, `file5.txt`
 
-`sudo vim /etc/hostname`
+### Working with /dev/null
 
-Then replace the old hostname with the new one.
+`/dev/null` is a special file that:
 
-Update /etc/hosts:
+- Discards all data written to it
+- Used for output suppression
+- Common usage:
 
-`sudo vim /etc/hosts`
+  ```bash
+  command > /dev/null    # Suppress command output
+  cat /dev/null > file   # Clear file contents
+  ```
 
-`/dev/null` is a special file in Unix-like operating systems that discards all data written to it. It is often used to redirect output to nothing, effectively suppressing it. For example, `command > /dev/null` redirects the output of `command` to `/dev/null`, effectively silencing any output.`cat /dev/null > file` will delete the content of file.
+## System Configuration
 
-## Create a file and append text to it
+### Hostname Management
 
-note: there should be no space between `<<` and `EOF` and around `EOF`
+**Temporary Change (until reboot)**
+
+```bash
+sudo hostname new-hostname
+```
+
+**Permanent Change**
+
+```bash
+sudo hostnamectl set-hostname new-hostname
+```
+
+**Manual Configuration**
+
+1. Edit hostname file:
+
+   ```bash
+   sudo vim /etc/hostname
+   ```
+
+2. Update hosts file:
+
+   ```bash
+   sudo vim /etc/hosts
+   ```
+
+## File Creation with Content
+
+### Creating HTML File Using Heredoc
 
 ```bash
 cat > file.html <<EOF
@@ -43,3 +83,5 @@ cat > file.html <<EOF
 </html>
 EOF
 ```
+
+> **Note**: When using heredoc (`<<EOF`), ensure there are no spaces between `<<` and `EOF` or around `EOF`
