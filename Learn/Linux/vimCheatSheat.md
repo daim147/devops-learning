@@ -107,3 +107,81 @@ By default, it opens in command mode. To enter insert mode, press `i`. To enter 
 - `:help` - Open help
 - `:set number` - Show line numbers
 - `:set nonumber` - Hide line numbers
+
+## Reviewing Changes in Vim
+
+To review changes in Vim, you can use several built-in features and plugins. Here are some methods to help you review changes:
+
+### 1. Using Vim's Built-in Features
+
+#### Undo and Redo
+
+- **Undo**: To undo changes, press `u`.
+- **Redo**: To redo changes, press `Ctrl-r`.
+
+#### Viewing Undo History
+
+- **Undo Tree**: Vim has an undo tree that allows you to navigate through different states of your file.
+  - To view the undo tree, you can use the `:undolist` command.
+  - To navigate through the undo tree, you can use `:earlier` and `:later` commands.
+
+### 2. Using Diff Mode
+
+If you have two versions of a file and want to compare them, you can use Vim's diff mode.
+
+#### Open Files in Diff Mode
+
+```bash
+vimdiff file1 file2
+```
+
+or within Vim:
+
+```vim
+:vert diffsplit file2
+```
+
+### 3. Using Plugins
+
+If you are using Git, the vim-fugitive plugin is very powerful for reviewing changes.
+Install `vim-fugitive`: You can install it using a plugin manager like vim-plug.
+
+First need to install Plug
+
+```base
+Plug 'tpope/vim-fugitive'
+```
+
+View Git Diff: Within Vim, you can use the following commands:
+
+- `:Gdiff` - Open the Git diff for the current file.
+- `:Gstatus` - Open the Git status window to stage or view changes.
+- `:Gblame` - Open the Git blame view to see who changed each line.
+- `:Gcommit` - Open the Git commit window to write a commit message.
+- `:Gpush` - Push changes to the remote repository.
+- `:Gpull` - Pull changes from the remote repository.
+- `:Glog` - View the Git log.
+- `:Ggrep` - Search the Git repository.
+- `:Gmove` - Move or rename a file in Git.
+- `:Gdelete` - Delete a file in Git.
+- `:Gread` - Read a file from the Git repository.
+- `:Gwrite` - Write the current file to the Git repository.
+- `:Gbrowse` - Open the current file in the Git repository in a web browser.
+- `:Gedit` - Open a file from the Git repository.
+- `:Gbrowse` - Open the current file in the Git repository in a web browser.
+
+#### vim-signify or vim-gitgutter
+
+These plugins show a visual representation of changes in the gutter (the left side of the editor).
+
+Install vim-signify:
+
+```vim
+Plug 'mhinz/vim-signify'
+```
+
+Install vim-gitgutter:
+
+```vim
+Plug 'airblade/vim-gitgutter'
+```

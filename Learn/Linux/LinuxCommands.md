@@ -10,7 +10,7 @@
 
 `cd` changes the current working directory. It can be used to navigate to different directories on the system. Use `cd -` to switch to the previous directory, and `cd ~` to go to the home directory.
 
-`ls` lists the contents of a directory. It can be used to view files and directories in the current directory, as well as their permissions, ownership, and size. `-l` flag displays detailed information about files and directories, `-a` flag displays hidden files and directories, `-h` flag displays file sizes in a human-readable format. `-t` flag sorts files and directories by modification time. `-r` flag reverses the order of the sorting.
+`ls` lists the contents of a directory. It can be used to view files and directories in the current directory, as well as their permissions, ownership, and size. `-l` flag displays detailed information about files and directories, `-a` flag displays hidden files and directories, `-h` flag displays file sizes in a human-readable format. `-t` flag sorts files and directories by modification time. `-r` flag reverses the order of the sorting. `-d` flag displays only directories. `-R` flag recursively lists subdirectories.
 
 `touch` creates a new empty file. It can be used to create files in the current directory or specify a path to create files in a specific location.
 
@@ -47,8 +47,6 @@
     system hostname is the name that identifies a system on a network. It is used to uniquely identify the system and allow other systems to communicate with it. The hostname is typically set during the system installation process and can be changed later if needed.
 
     vagrant@localhost is the default hostname for a Vagrant virtual machine. It consists of the username "vagrant" and the hostname "localhost" The hostname "localhost" is used to refer to the local system, while the username "vagrant" is the default username for a Vagrant virtual machine.s
-
-`ping` sends ICMP echo requests to a target host and waits for a response. It can be used to test network connectivity between two hosts and diagnose network-related issues.
 
 `file` determines the type of a file. It can be used to identify the file type, such as text, binary, or executable, and provide information about the file's contents and usage.
 
@@ -243,8 +241,6 @@ Example: `usermod -u 1002 -g 1002 -d /home/test2 -s /bin/bash test`, `usermod -l
 
 `last` displays the last login information for users. It can be used to view the login history of users, including the date, time, and duration of their last login. Use `-n` to specify the number of entries to display. Example: `last -n 5`.
 
-`lsof` lists open files and processes. It can be used to view information about open files, network connections, and processes that are using them. Use `-i` to display network connections, `-u` to display processes for a specific user, and `-t` to display only process IDs (PIDs). Example: `lsof -i`, `lsof -u username`, `lsof -t`. First install this package.
-
 ### File Permissions
 
 | Character | Permission | Description                                                                                                                          |
@@ -281,7 +277,7 @@ To view the permissions of files and directories, you can use the `ls -l` comman
 
 `chmod` changes the permissions of files and directories. It can be used to change the permissions of a file or directory to allow or restrict read, write, and execute access for the owner, group, and others. Use `chmod u=rwx,g=rx,o=r file` to set permissions. Use `-R` to change permissions recursively for directories. Example: `chmod u=rwx,g=rx,o=r file`, `chmod -R u=rwx,g=rx,o=r directory`. or you can use numeric values like `chmod 777 file` or `chmod 755 file`. 777 means read, write and execute for owner, group and others. 755 means read, write and execute for owner and read and execute for group and others. `4` for read, `2` for write and `1` for execute.
 
-### Sudo
+## Sudo
 
 `sudo` allows users to run commands with elevated privileges. It can be used to perform administrative tasks that require root access, such as installing software, configuring system settings, and managing files and directories. Use `sudo command` to run a command with root privileges. Use `sudo -i` to start a new shell session as the root user. Use `sudo -u username command` to run a command as a specific user. Use `sudo -l` to list available commands for the current user. Use `sudo -v` to refresh the sudo timestamp. Use `sudo -k` to invalidate the sudo timestamp.
 
@@ -302,13 +298,13 @@ For Ubuntu and Debian based systems.
 
 `/etc/sudoers.d` directory contains additional configuration files for the sudo command. It can be used to add custom rules and configurations for specific `users` or `groups`. Files in this directory should follow the same syntax as the main sudoers file. add a file in this directory with `sudo visudo -f /etc/sudoers.d/filename` and add `username ALL=(ALL:ALL) ALL` in this file, for group `%groupname ALL=(ALL:ALL) ALL`.
 
-### Package Management
+## Package Management
 
 `curl` is a command-line tool for transferring data with URLs. It can be used to download files, upload files, and perform various network-related tasks. Use `curl URL` to download a file from a URL. Use `-O` to save the file with the original name. Use `-o filename` to save the file with a specific name. Use `-L` to follow redirects. Use `-I` to display the HTTP headers. Use `-X` to specify the HTTP method. Use `-d` to send data in a POST request. Use `-H` to add custom headers. Use `-u` to specify authentication credentials. Use `-v` to enable verbose mode. Verbose mode displays detailed information about the request and response.
 
 `wget` is a command-line tool for downloading files from the web. It can be used to download files, recursively download files from a website, and perform various network-related tasks. Use `wget URL` to download a file from a URL. Use `-O filename` to save the file with a specific name. Use `-r` to recursively download files. Use `-np` to exclude parent directories. Use `-nc` to skip existing files. Use `-c` to resume interrupted downloads. Use `-q` to enable quiet mode.s
 
-#### RPM Based Systems (Red Hat, CentOS, Fedora)
+### RPM Based Systems (Red Hat, CentOS, Fedora)
 
 `rpm` is the package manager for RPM-based Linux distributions. It can be used to install, upgrade, query, and remove software packages in the RPM format. Use `rpm -i package.rpm` to install a package, `rpm -U package.rpm` to upgrade a package, `rpm -q package` to query a package, and `rpm -e package` to remove a package. to list all installed packages use `rpm -qa`. to list files in a package use `rpm -ql package`. to verify a package use `rpm -V package`. to install a package with dependencies use `rpm -ivh package.rpm`. to install a package without dependencies use `rpm -ivh --nodeps package.rpm`. to install a package and ignore conflicts use `rpm -ivh --force package.rpm`. `-v` is used for verbose output, `-h` is used for hash marks.Hash marks are printed as the package archive is unpacked.
 
@@ -322,13 +318,13 @@ For Ubuntu and Debian based systems.
 | `yum`           | High-level package manager for RPM-based Linux distributions.                 | Use `yum` for easier package management with automatic dependency resolution. Suitable for most users.                                                      | Simplifies package management with automatic dependency resolution. Provides a higher-level interface for managing packages.               |
 | `dnf`           | Modern package manager for RPM-based Linux distributions, successor to `yum`. | Use `dnf` for modern package management with improved performance and better dependency handling. Recommended for newer systems.                            | Improved performance and better dependency handling compared to `yum`. Provides a more modern and efficient package management experience. |
 
-#### DPKG Based Systems (Debian, Ubuntu)
+### DPKG Based Systems (Debian, Ubuntu)
 
 `dpkg` is the package manager for DPKG-based Linux distributions. It can be used to install, upgrade, query, and remove software packages in the DEB format. Use `dpkg -i package.deb` to install a package, `dpkg -l package` to query a package, and `dpkg -r package` to remove a package. to list all installed packages use `dpkg -l`. to list files in a package use `dpkg -L package`.
 
 `apt` is a high-level package manager for DPKG-based Linux distributions. It can be used to install, upgrade, query, and remove software packages and dependencies. Use `apt install package` to install a package, `apt upgrade package` to upgrade a package, `apt list package` to query a package, and `apt remove package` to remove a package. to list all installed packages use `apt list --installed`. to search for a package use `apt search package`. to update all packages use `apt upgrade`. to clean the package cache use `apt clean`. to remove unused packages use `apt autoremove`. `apt purge package` is used to remove a package and its configuration files. to list package information use `apt show package`. to show package dependencies use `apt depends package`. to show reverse dependencies use `apt rdepends package`. to show package changelog use `apt changelog package`. to show package policy use `apt policy package`. to show package download size use `apt download package`. to show package source use `apt source package`.
 
-### Services
+## Services
 
 `systemctl` is a command-line tool for managing services on Linux systems. It can be used to start, stop, restart, enable, disable, and query services.
 Use `systemctl start service` to start a service,
@@ -340,6 +336,7 @@ Use `systemctl start service` to start a service,
 `systemctl is-active service` to check if a service is active,
 `systemctl disable service` to disable a service,  
 `systemctl status service` to query the status of a service.
+`sytemctl daemon-reload` to reload the systemd manager configuration.
 to list all services use `systemctl list-units --type=service`.
 to list all active services use `systemctl list-units --type=service --state=active`.
 to list all failed services use `systemctl list-units --type=service --state=failed`. to list all enabled services use `systemctl list-unit-files --type=service --state=enabled`. to list all disabled services use `systemctl list-unit-files --type=service --state=disabled`.
@@ -360,7 +357,7 @@ to show the system journal for a specific facility use `journalctl SYSLOG_FACILI
 to show the system journal for a specific identifier use `journalctl _SYSTEMD_INVOCATION_ID=id`.
 to show the system journal for a specific field use `journalctl FIELD=value`.
 
-### Process Management
+## Process Management
 
 `ps` displays information about processes. It can be used to view running processes, their process IDs (PIDs), parent process IDs (PPIDs), and resource usage. Use `-e` to display all processes, `-f` to display full information, and `-u` to display processes for a specific user. Example: `ps -u username`. `ps aux` is used to display all processes in a user-friendly format. `ps -ef` is used to display all processes in a detailed format. it also shows the parent process ID (PPID), the terminal associated with the process (TTY), and the start time of the process.
 
@@ -370,11 +367,13 @@ to show the system journal for a specific field use `journalctl FIELD=value`.
 
 `pkill` sends signals to processes based on their name. It can be used to terminate or send signals to running processes based on their name. Use `pkill processname` to send a signal to a process, `pkill -9 processname` to forcefully terminate a process, and `pkill -u username` to send a signal to all processes owned by a specific user. Example: `pkill processname`, `pkill -9 processname`, `pkill -u username`.
 
+`lsof` lists open files and processes. It can be used to view information about open files, network connections, and processes that are using them. Use `-i` to display network connections, `-u` to display processes for a specific user, and `-t` to display only process IDs (PIDs). Example: `lsof -i`, `lsof -u username`, `lsof -t`. First install this package.
+
 `pgrep` displays process IDs based on their name. It can be used to search for processes based on their name and display their process IDs. Use `pgrep processname` to display the process ID of a process. Example: `pgrep processname`.
 
 orphans are processes that have been abandoned by their parent process. They continue to run in the background even after their parent process has terminated. Orphan processes are adopted by the init process (PID 1) on Unix-like systems. usually when a parent process terminates, the child process is terminated as well. However, if the parent process does not wait for the child process to terminate, the child process becomes an orphan and is adopted by the init process. it can happen when a parent process terminates forcefully or unexpectedly.
 
-### System Information
+## System Information
 
 `df` displays disk space usage on the system. It can be used to view the amount of disk space used and available on mounted filesystems. `-h` flag can be used to display the output in a human-readable format. `-T` displays the filesystem type.
 
@@ -390,19 +389,41 @@ orphans are processes that have been abandoned by their parent process. They con
 
     swap space is a portion of the hard disk that is used as virtual memory when the physical memory (RAM) is full. It allows the system to swap data between RAM and the hard disk to free up memory and prevent system crashes due to memory exhaustion.
 
-`ip addr show` and `ifconfig` displays and configures network interfaces on Unix-like operating systems. It can be used to view information about network interfaces, configure network settings, and troubleshoot network connectivity issues.
-
-`netstat` displays network connections, routing tables, and interface statistics. It can be used to view active network connections, routing information, and network interface statistics. Use `-t` to display TCP connections, `-u` to display UDP connections, and `-l` to display listening ports. Example: `netstat -tuln`.
-
-`ss` displays socket statistics. It can be used to view detailed information about network sockets, such as active connections, listening ports, and socket states. Use `-t` to display TCP sockets, `-u` to display UDP sockets, and `-l` to display listening sockets. Example: `ss -tuln`.
-
 `lscpu` displays CPU information. It can be used to view detailed information about the CPU, such as the number of cores, threads, and cache sizes.
 
 `lsblk` displays block device information. It can be used to view information about block devices, such as hard drives, solid-state drives, and partitions.
 
-### Archive Management
+## Archive Management
 
 `tar` is a command-line tool for creating, extracting, and managing tar archives. It can be used to compress and decompress files and directories, create backups, and transfer data. Use `tar -czvf archive.tar file1 file2` to create a tar archive, `tar -xzvf archive.tar` to extract a tar archive, and `tar -tvf archive.tar` to list the contents of a tar archive. Use `-c` to create an archive, `-x` to extract an archive, `-t` to list the contents of an archive, `-v` for verbose output, and `-f` to specify the archive file. Use `-z` to compress with gzip, `-j` to compress with bzip2, and `-J` to compress with xz. `-C /directory` can be used to specify the directory to extract to.
 Example: `tar -czvf archive.tar.gz file1 file2`, `tar -xzvf archive.tar.gz`.
 
 `zip` is a command-line tool for creating, extracting, and managing zip archives. It can be used to compress and decompress files and directories, create backups, and transfer data. Use `zip archive.zip file1 file2` to create a zip archive, `unzip archive.zip` to extract a zip archive, and `unzip -l archive.zip` to list the contents of a zip archive. Use `-r` to recursively compress directories, `-l` to list the contents of an archive, and `-d` to delete files from an archive. Example: `zip -r archive.zip directory`, `unzip archive.zip`. First install this package.
+
+## Networking
+
+`ping` sends ICMP echo requests to a host. It can be used to test network connectivity, measure round-trip times, and troubleshoot network issues. Use `ping hostname` to send ICMP echo requests to a host, `ping -c count` to specify the number of packets to send, and `ping -i interval` to specify the interval between packets. Example: `ping google.com`, `ping -c 5 google.com`, `ping -i 2 google.com`.
+
+`ifconfig` displays and configures network interfaces on Unix-like operating systems. It can be used to view information about network interfaces, configure network settings, and troubleshoot network connectivity issues. First install this package.
+
+`ip addr show` and `ifconfig` displays and configures network interfaces on Unix-like operating systems. It can be used to view information about network interfaces, configure network settings, and troubleshoot network connectivity issues.
+
+`ss` displays socket statistics. It can be used to view detailed information about network sockets, such as active connections, listening ports, and socket states. Use `-t` to display TCP sockets, `-u` to display UDP sockets, and `-l` to display listening sockets. Example: `ss -tuln`.
+
+`traceroute` traces the route to a host. It can be used to trace the path that packets take from the local host to a remote host. Use `traceroute hostname` to trace the route to a host, `traceroute -n` to display IP addresses instead of hostnames, and `traceroute -q count` to specify the number of packets to send. Example: `traceroute google.com`, `traceroute -n google.com`, `traceroute -q 5 google.com`.
+
+`netstat` displays network connections, routing tables, and interface statistics. It can be used to view active network connections, routing information, and network interface statistics. Use `-t` to display TCP connections, `-u` to display UDP connections, and `-l` to display listening ports. Example: `netstat -tuln`. `-a` displays all sockets, `-n` displays numerical addresses, `-p` displays the process ID and name, `-r` displays the routing table, `-s` displays network statistics, `-i` displays network interfaces, `-c` continuously refreshes the output. Example: `netstat -antp` to display all TCP connections with process information.
+
+`nmap` is a network scanning tool. It can be used to discover hosts, services, and open ports on a network. Use `nmap hostname` to scan a host, `nmap -p port` to scan a specific port, and `nmap -sV` to detect service versions. Example: `nmap google.com`, `nmap -p 80 google.com`, `nmap -sV google.com`. First install this package.
+
+`nslookup` is a DNS lookup tool. It can be used to query DNS servers, resolve hostnames, and retrieve DNS records. Use `nslookup hostname` to query a DNS server, `nslookup -type=type` to specify the record type, and `nslookup -query=type` to query a specific record type. Example: `nslookup google.com`, `nslookup -type=mx google.com`, `nslookup -query=mx google.com`.
+
+`dig` is a new DNS lookup tool. It can be used to query DNS servers, resolve hostnames, and retrieve DNS records. Use `dig hostname` to query a DNS server, `dig -t type` to specify the record type, and `dig +short` to display only the IP address. Example: `dig google.com`, `dig -t mx google.com`, `dig +short google.com`.
+
+`route` displays and configures the IP routing table. It can be used to view and modify the routing table, add or delete routes, and troubleshoot network connectivity issues. Use `route -n` to display IP addresses instead of hostnames, `route add` to add a route, and `route del` to delete a route. Example: `route -n`, `route add default gw
+
+`arp` displays and modifies the ARP cache. It can be used to view and modify the ARP cache, add or delete ARP entries, and troubleshoot network connectivity issues. Use `arp -n` to display IP addresses instead of hostnames, `arp -s` to add an ARP entry, and `arp -d` to delete an ARP entry. Example: `arp -n`, `arp -s ip mac`, `arp -d ip`.
+
+`mtr` combines the functionality of `ping` and `traceroute`. It can be used to trace the route to a host and measure round-trip times to each hop. Use `mtr hostname` to trace the route to a host, `mtr -c count` to specify the number of packets to send, and `mtr -i interval` to specify the interval between packets. Example: `mtr google.com`, `mtr -c 5 google.com`, `mtr -i 2 google.com`.
+
+`telnet` is a network protocol tool. It can be used to establish a connection to a remote host, test network services, and troubleshoot network connectivity issues. Use `telnet hostname port` to connect to a host and port, `telnet -l username hostname port` to specify a username, and `telnet -a hostname port` to enable automatic login. Example: `telnet google.com 80`, `telnet -l username google.com 22`, `telnet -a google.com 25`. it can be used to test network services like HTTP, SMTP, POP3, IMAP, SSH, FTP, etc. or to check if a port is open or closed.
