@@ -21,11 +21,14 @@ docker build -t myapp:1.0 .
 ### Containers
 
 ```bash
-# Run a container
+# Run a container -d (detached mode) --name (container name)
 docker run -d --name webserver nginx
 
-# Run with port mapping
+# Run with port mapping -p (host_port:container_port)
 docker run -d -p 8080:80 nginx
+
+# Run with environment variables -e (key=value)
+docker run -d -e APP_ENV=production nginx
 
 # Run with volume mount
 docker run -v /host/path:/container/path nginx
@@ -41,6 +44,18 @@ docker stop container_name
 
 # Remove a container
 docker rm container_name
+
+# Remove image
+docker rmi image_name
+
+# Remove all images not used by any container
+docker system prune -a
+
+# Remove all stopped containers
+docker container prune
+
+# Inspect container
+docker inspect container_name
 
 # Access container shell
 docker exec -it container_name bash
@@ -80,11 +95,23 @@ docker volume rm myvolume
 # Start services
 docker-compose up -d
 
-# Stop services
+# Stop services and remove containers
 docker-compose down
 
 # View logs
 docker-compose logs
+
+# View running services
+docker-compose ps
+
+# Restart service
+docker-compose restart web
+
+# Remove all containers
+docker-compose rm -f
+
+# Build and start services
+docker-compose up --build
 
 # Scale service
 docker-compose up -d --scale web=3
