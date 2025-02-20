@@ -1,5 +1,19 @@
 # Virtualization
 
+## Table of Contents
+
+- [Virtualization](#virtualization)
+- [Hypervisor](#hypervisor)
+  - [Type 1 Hypervisor (Bare-Metal)](#type-1-hypervisor-bare-metal)
+  - [Type 2 Hypervisor (Hosted)](#type-2-hypervisor-hosted)
+- [Host OS and Guest OS](#host-os-and-guest-os)
+- [Bridging](#bridging)
+- [General Steps in Virtual Machine Creation](#general-steps-in-virtual-machine-creation)
+- [Vagrant](#vagrant)
+  - [Basic Vagrant Commands](#basic-vagrant-commands)
+- [Provisioning](#provisioning)
+  - [Vagrant Provisioning](#vagrant-provisioning)
+
 Virtualization is the process of creating a virtual version of a resource, such as a server, storage device, network, or operating system. This virtual version can be used to run multiple instances of the resource on a single physical machine, enabling efficient use of hardware resources and improved flexibility and scalability.
 
 Virtualization can be used in various scenarios, such as server virtualization, desktop virtualization, network virtualization, and storage virtualization. It allows organizations to consolidate their IT infrastructure, reduce costs, improve resource utilization, and enhance disaster recovery and business continuity capabilities.

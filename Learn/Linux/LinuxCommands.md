@@ -1,5 +1,24 @@
 # Linux Commands
 
+## Table of Contents
+
+- [Basic Commands](#basic-commands)
+- [File Content Commands](#file-content-commands)
+- [System Information Commands](#system-information-commands)
+- [Linking Commands](#linking-commands)
+- [History and Searching](#history-and-searching)
+- [Text Processing Commands](#text-processing-commands)
+- [Input/Output Redirection](#inputoutput-redirection)
+- [User Management](#user-management)
+- [File Permissions](#file-permissions)
+- [Sudo](#sudo)
+- [Package Management](#package-management)
+- [Services](#services)
+- [Process Management](#process-management)
+- [System Information](#system-information)
+- [Archive Management](#archive-management)
+- [Networking](#networking)
+
 ## Basic Commands
 
 ### `man`
@@ -138,6 +157,10 @@ Displays the username of the current user. It can be used to view the username o
 ### `file`
 
 Determines the type of a file. It can be used to identify the file type, such as text, binary, or executable, and provide information about the file's contents and usage.
+
+### `printenv`
+
+Displays the environment variables. It can be used to view the environment variables available to the current user and their values.
 
 ## Linking Commands
 

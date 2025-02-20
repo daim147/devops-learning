@@ -1,5 +1,30 @@
 # Linux Folder Structure
 
+## Table of Contents
+
+- [Linux Folder Structure](#linux-folder-structure)
+  - [Table of Contents](#table-of-contents)
+  - [/etc](#etc)
+  - [/root](#root)
+  - [/home](#home)
+  - [/bin](#bin)
+  - [/sbin](#sbin)
+  - [/usr](#usr)
+  - [/var](#var)
+  - [/tmp](#tmp)
+  - [/dev](#dev)
+  - [/proc](#proc)
+  - [/sys](#sys)
+  - [/boot](#boot)
+  - [/mnt](#mnt)
+  - [/media](#media)
+  - [/opt](#opt)
+  - [/lib](#lib)
+  - [/lib64](#lib64)
+  - [/srv](#srv)
+  - [/run](#run)
+  - [/lost+found](#lostfound)
+
 All the files and directories in Linux are arranged in a hierarchical structure. The root directory `/` is the top-level directory in the file system, and all other directories are subdirectories of the root directory. The Linux file system follows the Filesystem Hierarchy Standard (FHS), which defines the structure and contents of the file system. The files _can vary from one distribution to another_, but the basic structure remains the same.
 
 These are some of the common directories found in a Linux file system:
