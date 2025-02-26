@@ -17,15 +17,21 @@ Welcome to this comprehensive Bash scripting guide. Explore essential concepts, 
     - [Loops](#loops)
       - [For Loop](#for-loop)
       - [While Loop](#while-loop)
+    - [Test Operators](#test-operators)
+      - [Expression Operators](#expression-operators)
+      - [String Operators](#string-operators)
+      - [Integer Comparison Operators](#integer-comparison-operators)
+      - [File Test Operators](#file-test-operators)
   - [Functions](#functions)
   - [Arrays](#arrays)
   - [Arithmetic and Command Substitution](#arithmetic-and-command-substitution)
   - [Best Practices](#best-practices)
+  - [Cron Jobs](#cron-jobs)
   - [Conclusion](#conclusion)
 
 ## Introduction
 
-Bash is a powerful Unix shell and command language. It serves as an interactive shell and a scripting language to automate tasks and system operations.
+Bash is a powerful Unix shell and command language. It not only serves as an interactive shell but also as a scripting language to automate tasks and system operations.
 
 ## Getting Started
 
@@ -40,6 +46,8 @@ chmod +x myscript.sh
 
 # Add the shebang at the top it makes the script executable /bin/bash is the path to the bash interpreter that will be used to run the script and #! is the shebang character sequence that tells the system that the file is a script and should be interpreted by the specified program
 echo "#!/bin/bash" > myscript.sh
+
+
 ```
 
 ## Variables
@@ -161,6 +169,44 @@ while [ $count -lt 5 ]; do
 done
 ```
 
+### Test Operators
+
+Bash provides various test operators for use in conditional statements. Here are the commonly used operators:
+
+#### Expression Operators
+
+| Operator       | Description             |
+| -------------- | ----------------------- |
+| `! EXPRESSION` | The EXPRESSION is false |
+
+#### String Operators
+
+| Operator             | Description                                      |
+| -------------------- | ------------------------------------------------ |
+| `-n STRING`          | The length of STRING is greater than zero        |
+| `-z STRING`          | The length of STRING is zero (i.e., it is empty) |
+| `STRING1 = STRING2`  | STRING1 is equal to STRING2                      |
+| `STRING1 != STRING2` | STRING1 is not equal to STRING2                  |
+
+#### Integer Comparison Operators
+
+| Operator                | Description                                   |
+| ----------------------- | --------------------------------------------- |
+| `INTEGER1 -eq INTEGER2` | INTEGER1 is numerically equal to INTEGER2     |
+| `INTEGER1 -gt INTEGER2` | INTEGER1 is numerically greater than INTEGER2 |
+| `INTEGER1 -lt INTEGER2` | INTEGER1 is numerically less than INTEGER2    |
+
+#### File Test Operators
+
+| Operator  | Description                                       |
+| --------- | ------------------------------------------------- |
+| `-d FILE` | FILE exists and is a directory                    |
+| `-e FILE` | FILE exists                                       |
+| `-r FILE` | FILE exists and the read permission is granted    |
+| `-s FILE` | FILE exists and its size is greater than zero     |
+| `-w FILE` | FILE exists and the write permission is granted   |
+| `-x FILE` | FILE exists and the execute permission is granted |
+
 ## Functions
 
 Functions modularize your code and help with code reuse.
@@ -217,6 +263,10 @@ set -e  # Exit on errors
 
 # Your script logic goes here...
 ```
+
+## Cron Jobs
+
+Cron jobs allow you to schedule tasks to run automatically at specific intervals. [Learn more](./cron_jobs.md).
 
 ## Conclusion
 
