@@ -41,6 +41,16 @@ Displays the current working directory. It can be used to view the full path of 
 Creates a new directory. It can be used to create directories in the current directory or specify a path to create directories in a specific location.
 
 - `-p`: Create parent directories if they do not exist.
+- `-m`: Set file permissions mode (as in chmod)
+- `-v`: Print a message for each created directory
+
+Examples:
+
+```bash
+mkdir -p /path/to/nested/directory
+mkdir -m 755 new_directory
+mkdir -v directory1 directory2 directory3
+```
 
 ### `cd`
 
@@ -48,6 +58,9 @@ Changes the current working directory. It can be used to navigate to different d
 
 - `cd -`: Switch to the previous directory.
 - `cd ~`: Go to the home directory.
+- `cd ..`: Move up one directory level
+- `cd ../..`: Move up two directory levels
+- `cd $VARIABLE`: Navigate to the directory stored in an environment variable
 
 ### `ls`
 
@@ -60,10 +73,33 @@ Lists the contents of a directory. It can be used to view files and directories 
 - `-r`: Reverses the order of the sorting.
 - `-d`: Displays only directories.
 - `-R`: Recursively lists subdirectories.
+- `-S`: Sort by file size
+- `-i`: Display inode number
+- `--color=auto`: Display files in different colors based on type
+
+Examples:
+
+```bash
+ls -la /etc                # List all files in /etc with details
+ls -ltrh                   # List files sorted by time in reverse with human-readable sizes
+ls -ld */                  # List only directories in current location
+```
 
 ### `touch`
 
 Creates a new empty file. It can be used to create files in the current directory or specify a path to create files in a specific location.
+
+- `-a`: Change only the access time
+- `-m`: Change only the modification time
+- `-c`: Don't create any files, just change timestamps if files exist
+- `-t STAMP`: Use a specific timestamp (format: [[CC]YY]MMDDhhmm[.ss])
+
+Examples:
+
+```bash
+touch -t 202301010000 file.txt    # Set file timestamp to Jan 1, 2023
+touch -c existing_file            # Update timestamp without creating if doesn't exist
+```
 
 ### `cp`
 
@@ -110,12 +146,40 @@ Displays a calendar for a specific month or year. It can be used to view the cal
 Displays the contents of a file. It can be used to view the contents of text files, concatenate multiple files, and create new files.
 
 - `cat file1 file2 > file3`: Concatenate files.
+- `-n`: Number all output lines
+- `-b`: Number non-blank output lines
+- `-A`: Show all invisible characters (tabs, line endings, etc.)
+- `-s`: Suppress repeated empty lines
+
+Examples:
+
+```bash
+cat -n file.txt                     # Show file contents with line numbers
+cat file1.txt file2.txt > merged.txt # Combine two files
+cat << EOF > file.txt               # Create a file with heredoc
+This is line 1
+This is line 2
+EOF
+```
 
 ### `less`
 
 Displays the contents of a file one page at a time. It can be used to view the contents of text files and navigate through them using keyboard shortcuts.
 
 - `-N`: Show line numbers.
+- `-i`: Case-insensitive search
+- `-S`: Chop long lines (don't wrap)
+- `-F`: Quit if content fits on one screen
+
+Key commands while in less:
+
+- `/pattern`: Search forward for pattern
+- `?pattern`: Search backward for pattern
+- `n`: Next search match
+- `N`: Previous search match
+- `g`: Go to first line
+- `G`: Go to last line
+- `q`: Quit
 
 ### `more`
 
@@ -200,7 +264,30 @@ Searches for files and directories. It can be used to search for files and direc
 - `-size`: Search by size.
 - `-type`: Search by type.
 - `-perm`: Search by permissions.
-- Example: `find /path/to/directory -name "pattern"`.
+- `-mtime`: Search by modification time (in days)
+- `-mmin`: Search by modification time (in minutes)
+- `-user`: Search by owner
+- `-exec command {} \;`: Execute a command on each found file
+- `-delete`: Delete matching files
+
+Examples:
+
+```bash
+# Find files modified in the last 7 days
+find /home -type f -mtime -7
+
+# Find files larger than 100MB
+find / -type f -size +100M
+
+# Find and delete empty files
+find /tmp -type f -size 0 -delete
+
+# Find files with specific permissions
+find /etc -type f -perm 644
+
+# Find and execute command on results
+find . -name "*.log" -exec grep "ERROR" {} \;
+```
 
 ### `locate`
 
@@ -228,6 +315,28 @@ A powerful programming language for text processing. It can be used to manipulat
 - `-v`: Pass variables to the script. Example: `awk -v var=value '{print $1, $3, var}' file.txt`.
 - `-i`: Edit files in place. Example: `awk -i inplace '{print $1, $3}' file.txt`.
 
+Additional awk examples:
+
+```bash
+# Print specific columns from CSV file
+awk -F, '{print $1,$3}' file.csv
+
+# Sum the values in a column
+awk '{sum += $1} END {print sum}' file.txt
+
+# Calculate average of values in a column
+awk '{sum += $1; count++} END {print sum/count}' file.txt
+
+# Print lines matching a pattern
+awk '/pattern/ {print $0}' file.txt
+
+# Print lines where field 3 > 100
+awk '$3 > 100 {print $0}' file.txt
+
+# Use with other commands in a pipeline
+ps aux | awk '$3 > 50.0 {print $2,$3,$11}'
+```
+
 ### `sed`
 
 A stream editor for filtering and transforming text. It can be used to perform text transformations, deletions, substitutions, and more.
@@ -236,6 +345,28 @@ A stream editor for filtering and transforming text. It can be used to perform t
 - `-i`: Edit files in place. Example: `sed -i 's/pattern/replacement/g' file.txt`.
 - `-e`: Specify multiple commands. Example: `sed -e 's/pattern1/replacement1/g' -e 's/pattern2/replacement2/g' file.txt`.
 - `-f`: Specify a script file. Example: `sed -f script.sed file.txt`.
+
+Additional sed examples:
+
+```bash
+# Delete lines matching a pattern
+sed '/pattern/d' file.txt
+
+# Replace text only on specific lines
+sed '1,5 s/old/new/g' file.txt
+
+# Insert text before specific line
+sed '3i\This text is inserted before line 3' file.txt
+
+# Append text after specific line
+sed '3a\This text is appended after line 3' file.txt
+
+# Delete specific lines
+sed '5,10d' file.txt
+
+# Multiple operations
+sed -e 's/old1/new1/g' -e 's/old2/new2/g' file.txt
+```
 
 ### `wc`
 
@@ -304,6 +435,31 @@ A powerful command-line utility used for searching plain-text data for lines tha
 
 </details>
 
+Advanced grep examples:
+
+```bash
+# Search for a pattern in all files recursively
+grep -r "pattern" /path/to/directory
+
+# Count matches in a file
+grep -c "pattern" file.txt
+
+# Match only whole words
+grep -w "word" file.txt
+
+# Show context around matches (3 lines before and after)
+grep -C 3 "pattern" file.txt
+
+# Find all files not containing a pattern
+grep -L "pattern" *.txt
+
+# Use extended regular expressions
+grep -E "pattern1|pattern2" file.txt
+
+# Case-insensitive search with line numbers
+grep -in "pattern" file.txt
+```
+
 ## Input/Output Redirection
 
 ### `>`
@@ -364,6 +520,33 @@ Redirects both standard output and standard error to a file. It can be used to w
 Appends both standard output and standard error to a file. It can be used to append both output and error messages to a file or create a new file if it does not exist.
 
 - Example: `command &>> output.txt`.
+
+### Advanced I/O Examples
+
+```bash
+# Redirect both stdout and stderr to different files
+command 1>output.txt 2>error.txt
+
+# Redirect stderr to stdout, then to a file
+command > file.txt 2>&1
+
+# Discard output by redirecting to /dev/null
+command > /dev/null
+
+# Use "here documents" for multi-line input
+cat << EOF > file.txt
+Line 1
+Line 2
+Line 3
+EOF
+
+# Command substitution
+echo "Today is $(date)"
+echo "Files in directory: $(ls | wc -l)"
+
+# Process substitution
+diff <(ls dir1) <(ls dir2)
+```
 
 ## User Management
 
@@ -548,6 +731,39 @@ Changes the permissions of files and directories. It can be used to change the p
   - 755 means read, write, and execute for owner and read and execute for group and others.
   - `4` for read, `2` for write, and `1` for execute.
 
+### Understanding Numeric Permissions (chmod)
+
+| Number | Permission               | Symbol |
+| ------ | ------------------------ | ------ |
+| 0      | No permissions           | ---    |
+| 1      | Execute only             | --x    |
+| 2      | Write only               | -w-    |
+| 3      | Write and execute        | -wx    |
+| 4      | Read only                | r--    |
+| 5      | Read and execute         | r-x    |
+| 6      | Read and write           | rw-    |
+| 7      | Read, write, and execute | rwx    |
+
+Examples:
+
+- `chmod 755 file`: Owner has read, write, execute (7); Group and Others have read, execute (5)
+- `chmod 644 file`: Owner has read, write (6); Group and Others have read only (4)
+- `chmod 700 file`: Owner has all permissions (7); Group and Others have no permissions (0)
+
+### Special Permissions
+
+| Permission | Numeric Value | Effect on Files      | Effect on Directories               |
+| ---------- | ------------- | -------------------- | ----------------------------------- |
+| setuid     | 4000          | Execute as the owner | No effect                           |
+| setgid     | 2000          | Execute as the group | New files inherit directory's group |
+| sticky     | 1000          | No effect            | Only owner can delete files         |
+
+Examples:
+
+- `chmod 4755 file`: Set setuid bit (allows execution with owner's privileges)
+- `chmod 2755 directory`: Set setgid bit (files created in directory inherit group)
+- `chmod 1777 directory`: Set sticky bit (typically used on /tmp)
+
 ## Sudo
 
 ### `sudo`
@@ -719,6 +935,71 @@ A high-level package manager for DPKG-based Linux distributions. It can be used 
 - `apt download package`: Show package download size.
 - `apt source package`: Show package source.
 
+### Flatpak
+
+A next-generation technology for building and distributing desktop applications on Linux.
+
+```bash
+# Install Flatpak
+sudo apt install flatpak   # Debian/Ubuntu
+sudo dnf install flatpak   # Fedora
+
+# Add Flathub repository
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+# Search for applications
+flatpak search application_name
+
+# Install an application
+flatpak install flathub org.application.Name
+
+# Run an application
+flatpak run org.application.Name
+
+# List installed applications
+flatpak list
+
+# Update all applications
+flatpak update
+
+# Remove an application
+flatpak uninstall org.application.Name
+
+# Clean up unused data
+flatpak uninstall --unused
+```
+
+### Snap
+
+A package management system developed by Canonical for Linux distributions.
+
+```bash
+# Install Snap
+sudo apt install snapd   # Debian/Ubuntu
+sudo dnf install snapd   # Fedora
+
+# Search for applications
+snap find application_name
+
+# Install an application
+snap install application_name
+
+# List installed applications
+snap list
+
+# Update all applications
+snap refresh
+
+# Update specific application
+snap refresh application_name
+
+# Remove an application
+snap remove application_name
+
+# View application information
+snap info application_name
+```
+
 ## Services
 
 ### `systemctl`
@@ -756,6 +1037,49 @@ A command-line tool for managing services on Linux systems. It can be used to st
 - `journalctl SYSLOG_FACILITY=facility`: Show the system journal for a specific facility.
 - `journalctl _SYSTEMD_INVOCATION_ID=id`: Show the system journal for a specific identifier.
 - `journalctl FIELD=value`: Show the system journal for a specific field.
+
+### Systemd Unit Types
+
+| Unit Type | Description                                | File Extension |
+| --------- | ------------------------------------------ | -------------- |
+| Service   | System services                            | .service       |
+| Socket    | Inter-process communication sockets        | .socket        |
+| Device    | Device files recognized by the kernel      | .device        |
+| Mount     | File system mount points                   | .mount         |
+| Automount | File system auto-mount points              | .automount     |
+| Swap      | Swap files or partitions                   | .swap          |
+| Target    | Group of units                             | .target        |
+| Path      | File system path for path-based activation | .path          |
+| Timer     | Systemd timer                              | .timer         |
+| Slice     | Group processes for resource management    | .slice         |
+| Scope     | Externally created processes               | .scope         |
+
+Example: Creating a simple service file:
+
+```ini
+# /etc/systemd/system/myapp.service
+[Unit]
+Description=My Application Service
+After=network.target
+
+[Service]
+Type=simple
+User=appuser
+WorkingDirectory=/opt/myapp
+ExecStart=/usr/bin/python3 /opt/myapp/app.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Then enable and start with:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable myapp
+sudo systemctl start myapp
+```
 
 ## Process Management
 
@@ -812,6 +1136,71 @@ Displays process IDs based on their name. It can be used to search for processes
 
 > Orphans are processes that have been abandoned by their parent process. They continue to run in the background even after their parent process has terminated. Orphan processes are adopted by the init process (PID 1) on Unix-like systems. Usually, when a parent process terminates, the child process is terminated as well. However, if the parent process does not wait for the child process to terminate, the child process becomes an orphan and is adopted by the init process. It can happen when a parent process terminates forcefully or unexpectedly.
 
+### `htop`
+
+An interactive process viewer for Unix systems. It shows a frequently updated list of the processes running on a computer, with resource usage.
+
+```bash
+# Install htop
+sudo apt install htop   # Debian/Ubuntu
+sudo dnf install htop   # Fedora/RHEL/CentOS
+
+# Basic usage
+htop
+```
+
+Key features:
+
+- Interactive process management (kill, nice, etc.)
+- Colorful resource meters
+- Sortable columns
+- Tree view for process hierarchy
+- Filter processes by name
+
+Keyboard shortcuts:
+
+- F1: Help
+- F2: Setup menu (customize display)
+- F3: Search processes
+- F4: Filter processes
+- F5: Tree view
+- F6: Sort by column
+- F9: Kill process
+- F10: Quit
+
+### `nice` and `renice`
+
+Control the priority of processes.
+
+```bash
+# Start a process with a specific priority (-20 is highest, 19 is lowest)
+nice -n 10 command
+
+# Change the priority of a running process
+renice -n 10 -p PID
+```
+
+### Job Control
+
+Control processes in the current shell.
+
+```bash
+# Run a command in the background
+command &
+
+# List jobs
+jobs
+
+# Bring a background job to the foreground
+fg %job_number
+
+# Send a foreground job to the background
+Ctrl+Z (to suspend) then bg %job_number
+
+# Resume a suspended job in the background
+bg %job_number
+```
+
 ## System Information
 
 ### `df`
@@ -861,6 +1250,38 @@ Displays CPU information. It can be used to view detailed information about the 
 ### `lsblk`
 
 Displays block device information. It can be used to view information about block devices, such as hard drives, solid-state drives, and partitions.
+
+### `neofetch` or `screenfetch`
+
+Display system information in a visually appealing way.
+
+```bash
+# Install neofetch
+sudo apt install neofetch   # Debian/Ubuntu
+sudo dnf install neofetch   # Fedora/RHEL/CentOS
+
+# Basic usage
+neofetch
+```
+
+### `inxi`
+
+A full-featured system information script.
+
+```bash
+# Install inxi
+sudo apt install inxi   # Debian/Ubuntu
+sudo dnf install inxi   # Fedora/RHEL/CentOS
+
+# Basic system info
+inxi -F
+
+# Network information
+inxi -n
+
+# Display hardware info
+inxi -B
+```
 
 ## Archive Management
 
@@ -1012,3 +1433,250 @@ A network protocol tool. It can be used to establish a connection to a remote ho
 - Example: `telnet google.com 80`, `telnet -l username google.com 22`, `telnet -a google.com 25`.
 
 > It can be used to test network services like HTTP, SMTP, POP3, IMAP, SSH, FTP, etc. or to check if a port is open or closed.
+
+### `curl` with JSON formatting
+
+When dealing with JSON APIs, pipe curl output through a JSON formatting tool:
+
+```bash
+# Install jq
+sudo apt install jq   # Debian/Ubuntu
+sudo dnf install jq   # Fedora/RHEL/CentOS
+
+# Get and format JSON data
+curl -s https://api.example.com/data | jq
+
+# Extract specific fields from JSON
+curl -s https://api.example.com/data | jq '.results[0].name'
+```
+
+### SSH Tunneling
+
+Create secure tunnels for port forwarding:
+
+```bash
+# Local port forwarding (access remote service locally)
+ssh -L local_port:remote_host:remote_port user@ssh_server
+
+# Remote port forwarding (expose local service remotely)
+ssh -R remote_port:local_host:local_port user@ssh_server
+
+# Dynamic port forwarding (SOCKS proxy)
+ssh -D local_port user@ssh_server
+```
+
+## Advanced Tools
+
+### `tmux` - Terminal Multiplexer
+
+```bash
+# Install tmux
+sudo apt install tmux   # Debian/Ubuntu
+sudo dnf install tmux   # Fedora/RHEL/CentOS
+
+# Start a new session
+tmux
+
+# Start a named session
+tmux new -s session_name
+
+# List sessions
+tmux ls
+
+# Attach to a session
+tmux attach -t session_name
+
+# Detach from session
+Ctrl+b d
+
+# Split pane horizontally
+Ctrl+b "
+
+# Split pane vertically
+Ctrl+b %
+
+# Switch between panes
+Ctrl+b arrow_key
+
+# Create a new window
+Ctrl+b c
+
+# Switch to next window
+Ctrl+b n
+
+# Switch to specific window
+Ctrl+b window_number
+```
+
+### `rsync` - Fast File Transfer and Synchronization
+
+```bash
+# Basic syntax
+rsync [options] source destination
+
+# Sync files from local to remote preserving permissions and showing progress
+rsync -avzP /local/path/ user@remote:/remote/path/
+
+# Sync files from remote to local
+rsync -avzP user@remote:/remote/path/ /local/path/
+
+# Dry run (show what would happen)
+rsync -avzP --dry-run /local/path/ user@remote:/remote/path/
+
+# Exclude specific files or directories
+rsync -avzP --exclude='*.tmp' --exclude='temp/' /local/path/ user@remote:/remote/path/
+
+# Delete files in destination that don't exist in source
+rsync -avzP --delete /local/path/ user@remote:/remote/path/
+```
+
+### `nc` (netcat) - TCP/IP Swiss Army Knife
+
+```bash
+# Listen on a port
+nc -l 1234
+
+# Connect to a port
+nc hostname 1234
+
+# Transfer files
+# On receiving end:
+nc -l 1234 > received_file
+
+# On sending end:
+nc hostname 1234 < file_to_send
+
+# Port scanning
+nc -zv hostname 20-30
+
+# Create a simple chat server/client
+# Server:
+nc -l 1234
+
+# Client:
+nc hostname 1234
+```
+
+### `cron` - Task Scheduler
+
+```bash
+# Edit user's crontab
+crontab -e
+
+# List user's crontab entries
+crontab -l
+
+# Remove user's crontab
+crontab -r
+```
+
+Crontab format:
+
+```
+# minute hour day-of-month month day-of-week command
+# * * * * * command  (run every minute)
+# 0 * * * * command  (run every hour)
+# 0 0 * * * command  (run every day at midnight)
+# 0 0 * * 0 command  (run every Sunday at midnight)
+# 0 0 1 * * command  (run on first day of every month)
+# */5 * * * * command (run every 5 minutes)
+```
+
+### `screen` - Terminal Multiplexer
+
+```bash
+# Install screen
+sudo apt install screen   # Debian/Ubuntu
+sudo dnf install screen   # Fedora/RHEL/CentOS
+
+# Start a new session
+screen
+
+# Start a named session
+screen -S session_name
+
+# List sessions
+screen -ls
+
+# Attach to a session
+screen -r session_name
+
+# Detach from session
+Ctrl+a d
+
+# Create a new window
+Ctrl+a c
+
+# Switch to next window
+Ctrl+a n
+
+# Switch to previous window
+Ctrl+a p
+
+# Kill current window
+Ctrl+a k
+
+# Split horizontally
+Ctrl+a S
+
+# Split vertically
+Ctrl+a |
+
+# Switch between splits
+Ctrl+a Tab
+```
+
+## Performance Monitoring
+
+### `iostat` - Input/Output Statistics
+
+```bash
+# Install sysstat package
+sudo apt install sysstat   # Debian/Ubuntu
+sudo dnf install sysstat   # Fedora/RHEL/CentOS
+
+# Basic usage
+iostat
+
+# Continuous monitoring with 2-second intervals
+iostat 2
+
+# Display extended statistics
+iostat -x
+
+# Display statistics for specific device
+iostat -xd /dev/sda
+```
+
+### `vmstat` - Virtual Memory Statistics
+
+```bash
+# Basic usage
+vmstat
+
+# Continuous monitoring with 2-second intervals
+vmstat 2
+
+# Display statistics about memory, processes, paging, etc.
+vmstat -a
+```
+
+### `sar` - System Activity Reporter
+
+```bash
+# Real-time CPU usage
+sar -u 1 3
+
+# Memory usage
+sar -r 1 3
+
+# Disk I/O statistics
+sar -b 1 3
+
+# Network statistics
+sar -n DEV 1 3
+```
+
+---
+
+This cheat sheet is constantly evolving. For the most up-to-date and comprehensive information, refer to the man pages or official documentation.
